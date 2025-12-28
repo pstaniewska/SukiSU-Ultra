@@ -27,6 +27,15 @@
 #include "selinux/selinux.h"
 #include "throne_tracker.h"
 
+/* Hook enable flags for manual hooks - used by kernel patches */
+bool ksu_execveat_hook __read_mostly = true;
+bool ksu_vfs_read_hook __read_mostly = true;
+bool ksu_input_hook __read_mostly = true;
+EXPORT_SYMBOL(ksu_execveat_hook);
+EXPORT_SYMBOL(ksu_vfs_read_hook);
+EXPORT_SYMBOL(ksu_input_hook);
+
+
 bool ksu_module_mounted __read_mostly = false;
 bool ksu_boot_completed __read_mostly = false;
 
@@ -599,11 +608,7 @@ void ksu_ksud_exit()
     // unregister_kprobe(&vfs_read_kp);
     unregister_kprobe(&input_event_kp);
 }
-
 /* Export symbols for manual hooks - required for kernel patches */
 EXPORT_SYMBOL(ksu_handle_execveat_ksud);
 EXPORT_SYMBOL(ksu_handle_vfs_read);
 EXPORT_SYMBOL(ksu_handle_input_handle_event);
-EXPORT_SYMBOL(ksu_execveat_hook);
-EXPORT_SYMBOL(ksu_vfs_read_hook);
-EXPORT_SYMBOL(ksu_input_hook);
