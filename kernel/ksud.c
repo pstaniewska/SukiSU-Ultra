@@ -337,7 +337,7 @@ append_ksu_rc:
     return ret;
 }
 
-static int ksu_handle_vfs_read(struct file **file_ptr, char __user **buf_ptr,
+int ksu_handle_vfs_read(struct file **file_ptr, char __user **buf_ptr,
                                size_t *count_ptr, loff_t **pos)
 {
     struct file *file;
@@ -599,3 +599,11 @@ void ksu_ksud_exit()
     // unregister_kprobe(&vfs_read_kp);
     unregister_kprobe(&input_event_kp);
 }
+
+/* Export symbols for manual hooks - required for kernel patches */
+EXPORT_SYMBOL(ksu_handle_execveat_ksud);
+EXPORT_SYMBOL(ksu_handle_vfs_read);
+EXPORT_SYMBOL(ksu_handle_input_handle_event);
+EXPORT_SYMBOL(ksu_execveat_hook);
+EXPORT_SYMBOL(ksu_vfs_read_hook);
+EXPORT_SYMBOL(ksu_input_hook);
