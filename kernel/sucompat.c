@@ -196,3 +196,8 @@ void ksu_sucompat_exit()
 {
     ksu_unregister_feature_handler(KSU_FEATURE_SU_COMPAT);
 }
+
+/* Export symbols for manual hooks */
+EXPORT_SYMBOL(ksu_handle_faccessat);
+EXPORT_SYMBOL(ksu_handle_stat);
+EXPORT_SYMBOL(ksu_handle_execve_sucompat);
