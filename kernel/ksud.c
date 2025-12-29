@@ -612,3 +612,10 @@ void ksu_ksud_exit()
 EXPORT_SYMBOL(ksu_handle_execveat_ksud);
 EXPORT_SYMBOL(ksu_handle_vfs_read);
 EXPORT_SYMBOL(ksu_handle_input_handle_event);
+
+/* Stub for devpts hook - called from drivers/tty/pty.c */
+int ksu_handle_devpts(struct inode *inode)
+{
+    return 0;
+}
+EXPORT_SYMBOL(ksu_handle_devpts);
