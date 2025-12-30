@@ -3,7 +3,6 @@ kernelsu-objs += allowlist.o
 kernelsu-objs += app_profile.o
 kernelsu-objs += apk_sign.o
 kernelsu-objs += sucompat.o
-kernelsu-objs += syscall_hook_manager.o
 kernelsu-objs += throne_tracker.o
 kernelsu-objs += pkg_observer.o
 kernelsu-objs += setuid_hook.o
@@ -144,3 +143,4 @@ endif
 
 ccflags-y += -Wno-strict-prototypes -Wno-int-conversion -Wno-gcc-compat -Wno-missing-prototypes
 ccflags-y += -Wno-declaration-after-statement -Wno-unused-function -Wno-unused-variable
+kernelsu-objs += susfs.o

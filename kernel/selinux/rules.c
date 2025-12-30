@@ -97,6 +97,15 @@ void apply_kernelsu_rules()
     // https://android-review.googlesource.com/c/platform/system/logging/+/3725346
     ksu_dontaudit(db, "untrusted_app", KERNEL_SU_DOMAIN, "dir", "getattr");
 
+#ifdef CONFIG_KSU_SUSFS
+    // Allow umount in zygote process without installing zygisk
+    //ksu_allow(db, "zygote", "labeledfs", "filesystem", "unmount");
+    susfs_set_priv_app_sid();
+    susfs_set_init_sid();
+    susfs_set_ksu_sid();
+    susfs_set_zygote_sid();
+#endif // #ifdef CONFIG_KSU_SUSFS
+
     mutex_unlock(&ksu_rules);
 }
 

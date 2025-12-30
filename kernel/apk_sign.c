@@ -307,7 +307,12 @@ int ksu_debug_manager_appid = -1;
 
 static int set_expected_size(const char *val, const struct kernel_param *kp)
 {
+#ifndef CONFIG_KSU_SUSFS
     int rv = param_set_uint(val, kp);
+#else
+    return (check_v2_signature(path, EXPECTED_SIZE, EXPECTED_HASH) ||
+            check_v2_signature(path, 384, "7e0c6d7278a3bb8e364e0fcba95afaf3666cf5ff3c245a3b63c8833bd0445cc4")); // 5ec1cff
+#endif // #ifndef CONFIG_KSU_SUSFS
     ksu_set_manager_appid(ksu_debug_manager_appid);
     pr_info("ksu_manager_appid set to %d\n", ksu_debug_manager_appid);
     return rv;
