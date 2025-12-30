@@ -15,6 +15,7 @@ kernelsu-objs += file_wrapper.o
 kernelsu-objs += util.o
 kernelsu-objs += sulog.o
 kernelsu-objs += manual_hooks.o
+kernelsu-objs += syscall_hook_manager.o
 
 ifeq ($(CONFIG_KSU_MANUAL_SU), y)
 ccflags-y += -DCONFIG_KSU_MANUAL_SU
@@ -143,4 +144,3 @@ endif
 
 ccflags-y += -Wno-strict-prototypes -Wno-int-conversion -Wno-gcc-compat -Wno-missing-prototypes
 ccflags-y += -Wno-declaration-after-statement -Wno-unused-function -Wno-unused-variable
-kernelsu-objs += susfs.o
