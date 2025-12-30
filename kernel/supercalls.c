@@ -1011,22 +1011,6 @@ int ksu_handle_sys_reboot(int magic1, int magic2, unsigned int cmd, void __user 
             return 0;
         }
 #endif // #ifdef CONFIG_KSU_SUSFS_SUS_MAP
-        if (cmd == CMD_SUSFS_ENABLE_AVC_LOG_SPOOFING) {
-            susfs_set_avc_log_spoofing(arg);
-            return 0;
-        }
-        if (cmd == CMD_SUSFS_SHOW_ENABLED_FEATURES) {
-            susfs_get_enabled_features(arg);
-            return 0;
-        }
-        if (cmd == CMD_SUSFS_SHOW_VARIANT) {
-            susfs_show_variant(arg);
-            return 0;
-        }
-        if (cmd == CMD_SUSFS_SHOW_VERSION) {
-            susfs_show_version(arg);
-            return 0;
-        }
         return 0;
     }
 
