@@ -5,6 +5,7 @@
 #include <linux/seccomp.h>
 #include <linux/slab.h>
 #include <linux/thread_info.h>
+#include <linux/tty.h>
 #include <linux/uidgid.h>
 #include <linux/version.h>
 #include "objsec.h"

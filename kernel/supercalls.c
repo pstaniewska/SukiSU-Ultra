@@ -881,6 +881,7 @@ static void ksu_install_fd_tw_func(struct callback_head *cb)
     kfree(tw);
 }
 
+#ifndef CONFIG_KSU_SUSFS
 // downstream: make sure to pass arg as reference, this can allow us to extend things.
 int ksu_handle_sys_reboot(int magic1, int magic2, unsigned int cmd,
                           void __user **arg)
@@ -916,8 +917,6 @@ int ksu_handle_sys_reboot(int magic1, int magic2, unsigned int cmd,
 
     return 0;
 }
-
-#ifndef CONFIG_KSU_SUSFS
 // Reboot hook for installing fd
 static int reboot_handler_pre(struct kprobe *p, struct pt_regs *regs)
 {
