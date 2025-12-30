@@ -5,6 +5,7 @@
 #include <linux/types.h>
 #include <linux/fdtable.h>
 #include <linux/err.h>
+#include <linux/file.h>
 
 // Hook enable flags - defined in ksud.c, just declare extern here
 extern bool ksu_execveat_hook;
