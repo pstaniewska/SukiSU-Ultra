@@ -332,6 +332,7 @@ int ksu_handle_devpts(struct inode *inode)
 
     return 0;
 }
+EXPORT_SYMBOL(ksu_handle_devpts);
 #endif // #ifndef CONFIG_KSU_SUSFS
 
 // sucompat: permitted process can execute 'su' to gain root access.
