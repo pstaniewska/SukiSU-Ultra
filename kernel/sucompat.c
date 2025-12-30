@@ -245,6 +245,7 @@ int ksu_handle_execveat_sucompat(int *fd, struct filename **filename_ptr,
     return 0;
 }
 
+#ifndef CONFIG_KSU_SUSFS
 int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
             void *envp, int *flags)
 {
@@ -254,7 +255,9 @@ int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
     return ksu_handle_execveat_sucompat(fd, filename_ptr, argv, envp,
                         flags);
 }
+#endif
 
+#ifdef CONFIG_KSU_SUSFS
 int ksu_handle_faccessat(int *dfd, const char __user **filename_user, int *mode,
              int *__unused_flags)
 {
@@ -268,9 +271,8 @@ int ksu_handle_faccessat(int *dfd, const char __user **filename_user, int *mode,
     }
 
     return 0;
-
-    return 0;
 }
+#endif
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)
 int ksu_handle_stat(int *dfd, struct filename **filename, int *flags) {
