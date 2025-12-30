@@ -257,8 +257,5 @@ void susfs_set_priv_app_sid(void)
 #endif // #ifdef CONFIG_KSU_SUSFS
 
 #ifdef CONFIG_KSU_SUSFS
-bool susfs_is_current_ksu_domain(void) {
-    return is_ksu_domain();
-}
 bool susfs_is_avc_log_spoofing_enabled = false;
 #endif
