@@ -934,8 +934,7 @@ static struct kprobe reboot_kp = {
     .symbol_name = REBOOT_SYMBOL,
     .pre_handler = reboot_handler_pre,
 };
-#endif // #ifndef CONFIG_KSU_SUSFS
-#else
+#else // CONFIG_KSU_SUSFS
 int ksu_handle_sys_reboot(int magic1, int magic2, unsigned int cmd, void __user **arg)
 {
     if (magic1 != KSU_INSTALL_MAGIC1) {
