@@ -3,6 +3,7 @@ CONFIG_KSU_SUSFS := y
 CONFIG_KPM := y
 ccflags-y += -DCONFIG_KSU_SUSFS
 ccflags-y += -DCONFIG_KPM
+ccflags-y += -DKSU_BUILD_TIMESTAMP=$(shell date +%s)
 
 kernelsu-objs := ksu.o
 kernelsu-objs += allowlist.o
