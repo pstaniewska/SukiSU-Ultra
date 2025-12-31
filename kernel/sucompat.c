@@ -266,8 +266,8 @@ int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
                         flags);
 }
 EXPORT_SYMBOL(ksu_handle_execveat);
-EXPORT_SYMBOL(ksu_handle_execve_sucompat);
 #endif
+EXPORT_SYMBOL(ksu_handle_execve_sucompat);
 
 #ifdef CONFIG_KSU_SUSFS
 int ksu_handle_faccessat(int *dfd, const char __user **filename_user, int *mode,
