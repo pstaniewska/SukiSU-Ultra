@@ -255,7 +255,3 @@ void susfs_set_priv_app_sid(void)
     susfs_set_sid(KERNEL_PRIV_APP_DOMAIN, &susfs_priv_app_sid);
 }
 #endif // #ifdef CONFIG_KSU_SUSFS
-
-#ifdef CONFIG_KSU_SUSFS
-bool susfs_is_avc_log_spoofing_enabled = false;
-#endif
