@@ -1,11 +1,30 @@
-# Force enable SUSFS and KPM - Kconfig may not be properly parsed
+# Force enable all SUSFS and KPM features
 CONFIG_KSU_SUSFS := y
 CONFIG_KPM := y
-ccflags-y += -DCONFIG_KSU_SUSFS
-ccflags-y += -DCONFIG_KPM
-ccflags-y += -DKSU_BUILD_TIMESTAMP=$(shell date +%s)
-# Force KSU_VERSION to ensure it's never 0
+
+# Force KSU_VERSION
 KSU_VERSION := 40269
+
+# All SUSFS features
+ccflags-y += -DCONFIG_KSU_SUSFS
+ccflags-y += -DCONFIG_KSU_SUSFS_SUS_PATH
+ccflags-y += -DCONFIG_KSU_SUSFS_SUS_MOUNT
+ccflags-y += -DCONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT
+ccflags-y += -DCONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT
+ccflags-y += -DCONFIG_KSU_SUSFS_SUS_KSTAT
+ccflags-y += -DCONFIG_KSU_SUSFS_TRY_UMOUNT
+ccflags-y += -DCONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT
+ccflags-y += -DCONFIG_KSU_SUSFS_SPOOF_UNAME
+ccflags-y += -DCONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG
+ccflags-y += -DCONFIG_KSU_SUSFS_OPEN_REDIRECT
+ccflags-y += -DCONFIG_KSU_SUSFS_SUS_SU
+ccflags-y += -DCONFIG_KSU_SUSFS_SUS_MAP
+
+# KPM support
+ccflags-y += -DCONFIG_KPM
+
+# Invalidate ccache
+ccflags-y += -DKSU_BUILD_TIMESTAMP=$(shell date +%s)
 
 kernelsu-objs := ksu.o
 kernelsu-objs += allowlist.o
