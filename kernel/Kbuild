@@ -1,18 +1,5 @@
-# Detect SUSFS from .config if not set via Kconfig variable
-ifeq ($(CONFIG_KSU_SUSFS),)
-ifneq ($(shell grep -q "^CONFIG_KSU_SUSFS=y" $(objtree)/.config 2>/dev/null && echo y),)
-CONFIG_KSU_SUSFS := y
-$(info -- SUSFS detected from .config)
-endif
-endif
-
-# Detect KPM from .config if not set via Kconfig variable
-ifeq ($(CONFIG_KPM),)
-ifneq ($(shell grep -q "^CONFIG_KPM=y" $(objtree)/.config 2>/dev/null && echo y),)
-CONFIG_KPM := y
-$(info -- KPM detected from .config)
-endif
-endif
+# Include kernel config to get CONFIG_KSU_SUSFS and CONFIG_KPM
+-include $(objtree)/include/config/auto.conf
 
 kernelsu-objs := ksu.o
 kernelsu-objs += allowlist.o
