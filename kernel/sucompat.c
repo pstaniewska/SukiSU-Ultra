@@ -255,6 +255,18 @@ int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
     return ksu_handle_execveat_sucompat(fd, filename_ptr, argv, envp,
                         flags);
 }
+#else
+int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
+            void *envp, int *flags)
+{
+    if (ksu_handle_execveat_ksud(fd, filename_ptr, argv, envp, flags)) {
+        return 0;
+    }
+    return ksu_handle_execveat_sucompat(fd, filename_ptr, argv, envp,
+                        flags);
+}
+EXPORT_SYMBOL(ksu_handle_execveat);
+EXPORT_SYMBOL(ksu_handle_execve_sucompat);
 #endif
 
 #ifdef CONFIG_KSU_SUSFS
@@ -351,4 +363,3 @@ void ksu_sucompat_exit()
 /* Export symbols for manual hooks */
 EXPORT_SYMBOL(ksu_handle_faccessat);
 EXPORT_SYMBOL(ksu_handle_stat);
-EXPORT_SYMBOL(ksu_handle_execve_sucompat);
