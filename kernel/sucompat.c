@@ -197,6 +197,31 @@ static const char ksud_path[] = KSUD_PATH;
 
 extern bool ksu_kernel_umount_enabled;
 
+// ksu_handle_execve_sucompat for SUSFS - needed by syscall_hook_manager
+int ksu_handle_execve_sucompat(const char __user **filename_user,
+                               void *__never_use_argv, void *__never_use_envp,
+                               int *__never_use_flags)
+{
+    char path[sizeof(su_path) + 1] = {0};
+
+    if (unlikely(!filename_user))
+        return 0;
+
+    if (!ksu_is_allow_uid_for_current(current_uid().val))
+        return 0;
+
+    strncpy_from_user_nofault(path, *filename_user, sizeof(path));
+
+    if (likely(memcmp(path, su_path, sizeof(su_path))))
+        return 0;
+
+    pr_info("ksu_handle_execve_sucompat: su found\n");
+    *filename_user = ksud_user_path();
+    escape_with_root_profile();
+
+    return 0;
+}
+
 /*
  * return 0 -> No further checks should be required afterwards
  * return 1 -> Further checks should be continued afterwards
